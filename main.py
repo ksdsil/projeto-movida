@@ -57,7 +57,7 @@ def transformar_dados(dados_brutos):
         ano_modelo = int(carro.get("ano_modelo", ano_atual))
         idade = ano_atual - ano_modelo
         idade_tratada = 0.5 if idade == 0 else idade
-        trm = int(carro.get("quilometragem", 0)) / (idade_tratada * 12)
+        trm = round(int(carro.get("quilometragem", 0)) / (idade_tratada * 12))
         
         veiculos_limpos.append({
             "id_carro": carro.get("id"),
@@ -68,7 +68,7 @@ def transformar_dados(dados_brutos):
             "ano_fabricacao": ano_modelo,
             "quilometragem": int(carro.get("quilometragem", 0)),
             "idade_anos": idade,
-            "trm": round(trm, 0), # Nosso KPI autoral incluído direto no Silver!
+            "trm": int(trm) if trm == trm else 0,# Nosso KPI autoral incluído direto no Silver!
             "preco": float(carro.get("preco", 0.0)),
             "valor_parcela": float(carro.get("financiamento", {}).get("valor_parcela", 0.0)),
             "loja": carro.get("loja", "NI"),
