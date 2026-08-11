@@ -6,7 +6,7 @@ import os
 # URL da API oculta da Movida
 API_URL = "https://be-seminovos.movidacloud.com.br/elasticsearch/veiculos"
 
-# Headers simulando um navegador real (Essencial para não ser bloqueado)
+# Headers simulando um navegador real (pra não ser bloqueado)
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
     "Accept": "application/json, text/plain, */*",
@@ -18,10 +18,10 @@ HEADERS = {
 def coletar_veiculos():
     print("[*] Iniciando coleta de dados via API (Camada Bronze)...")
     todos_veiculos = []
-    offset = 0  # O payload inicial é {"from": null}, que equivale a 0
+    offset = 0  # O payload inicial é {"from": null}, que é equivale a 0
     
     while True:
-        # Monta o payload para paginação
+        # Monta o payload pra paginação
         payload = {"from": offset}
         
         try:
@@ -37,11 +37,11 @@ def coletar_veiculos():
                 print("[!] Nenhum veículo encontrado nesta página. Fim da coleta.")
                 break
                 
-            # Adiciona os carros da página atual à lista geral
+            # Adiciona os carros da página atual na lista geral
             todos_veiculos.extend(lista_carros)
             print(f"[+] Coletados {len(todos_veiculos)} de {total_carros} veículos...")
             
-            # Atualiza o offset para a próxima página (próximos 20 carros)
+            # Atualiza o offset para a próxima página (os próxims 20 carros)
             offset += len(lista_carros)
             
             # Condição de parada: se já pegamos todos os carros
@@ -49,7 +49,7 @@ def coletar_veiculos():
                 print("[*] Todos os veículos foram coletados com sucesso!")
                 break
                 
-            # Pausa de 0.5s para não bombardear o servidor (Boas práticas de scraping)
+            # Pausa de 0.5s pra não bombardear o servidor 
             time.sleep(0.5)
             
         except requests.exceptions.RequestException as e:
@@ -63,11 +63,11 @@ def salvar_camada_bronze(veiculos):
         print("[!] Nenhum dado para salvar.")
         return
 
-    # Cria a pasta 'bronze' se não existir
+    # Cria a pasta 'bronze' se ela não existir
     pasta_bronze = "bronze"
     os.makedirs(pasta_bronze, exist_ok=True)
     
-    # Nome do arquivo com timestamp para histórico
+    # Nome do arquivo com tmestamp para histórico
     nome_arquivo = os.path.join(pasta_bronze, "veiculos_raw.json")
     
     # Salva os dados brutos
