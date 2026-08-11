@@ -11,7 +11,7 @@ from supabase import create_client, Client
 # Carrega variáveis de ambiente (funciona no Linux local e no GitHub Actions)
 load_dotenv()
 
-# Pega as credenciais do ambiente (seguro para subir pro GitHub)
+# Pega as credenciais do ambiente (seguro pra subir no GitHub)
 API_URL = "https://be-seminovos.movidacloud.com.br/elasticsearch/veiculos"
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
