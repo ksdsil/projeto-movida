@@ -25,7 +25,7 @@ def transformar_para_silver(dados_brutos):
             ano_modelo = int(carro.get("ano_modelo", ano_atual))
             idade_veiculo = ano_atual - ano_modelo
             
-            # Coleta da loja exata (resolvendo a pegadinha)
+            # Coleta da loja exata 
             loja = carro.get("loja", "Não Informado")
             cidade = carro.get("cidade", "Não Informado")
             uf = carro.get("uf", "NI")
